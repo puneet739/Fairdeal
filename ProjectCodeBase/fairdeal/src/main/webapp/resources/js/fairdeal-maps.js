@@ -14,7 +14,7 @@ function initializeMap() {
 
 function drawMarkerList(listing) {
 	for (var i = 0; i < listing.length; i++){
-		drawMarker(listing[i].cordinates.latitude, listing[i].cordinates.longitude, listing[i].description, listing[i].description, map);
+		drawMarker(listing[i].latitude, listing[i].longitude, listing[i].description, listing[i].description, map);
     }
 }
 

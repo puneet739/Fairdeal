@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.fairdeal</groupId>
-	<artifactId>fairdeal</artifactId>
+	<artifactId>jsf-web</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>fairdeal Maven Webapp</name>
@@ -30,6 +30,15 @@
 	</dependencyManagement>
 
 	<dependencies>
+
+		<!-- Fairdeal Dependency -->
+		<dependency>
+			<groupId>com.fairdeal</groupId>
+			<artifactId>delirium</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -103,19 +112,16 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.16</version>
-			<scope>runtime</scope>
 		</dependency>
 		<!-- JSF-303 Dependency Injection -->
 		<dependency>

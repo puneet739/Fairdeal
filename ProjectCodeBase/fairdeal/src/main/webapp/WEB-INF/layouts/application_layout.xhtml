@@ -1,80 +1,89 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<ui:insert name="title">
 		<title>FairDealProperties</title>
 	</ui:insert>
-	<link rel="stylesheet"
-		href="#{request.contextPath}/resources/css/symbolset.css" />
-	<link rel="stylesheet"
-		href="#{request.contextPath}/resources/css/urban_compass.gz.css" />
-	<link rel="stylesheet"
-		href="#{request.contextPath}/resources/css/normalize.css" />
-	<link rel="stylesheet"
-		href="#{request.contextPath}/resources/css/style.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/symbolset.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/urban_compass.gz.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/normalize.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css" />
 	<!-- This is added to overcome the issue with IE and d3 compatibilty. -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 </h:head>
 
 <h:body>
+	<ui:insert name="initialiation" />
 	<header id="header"> <!-- Turn into a block so that on search page, you can have it be uncontained by default -->
 	<div class="width_container clearfix">
 
 		<div id="logo">
 			<div class="fancy">
-			<a href="home">
-				<img class="rotate"
-					src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/logo.svg"
+				<a href="#{request.contextPath}/views/homePage.xhtml"> <img class="rotate" src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/logo.svg"
 					alt="FairDeal" /></a>
 				<div class="logo_rotate">
-					<a href="home"><img class="rotate"
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/logo_circle.svg"
-						alt="FairDeal" /></a>
+					<a href="#{request.contextPath}/views/homePage.xhtml"><img class="rotate"
+						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/logo_circle.svg" alt="FairDeal" /></a>
 				</div>
 			</div>
 			<div class="normal">
-				<a href="home"><img
-					src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/logo.svg"
+				<a href="#{request.contextPath}/views/homePage.xhtml"><img src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/logo.svg"
 					alt="FairDeal" /></a>
 			</div>
 		</div>
 
-		<a href="" id="hamburger-navigation" class="standout"><img
-			src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/hamburger.png"
+		<a href="" id="hamburger-navigation" class="standout"><img src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/hamburger.png"
 			alt="Navigation" /></a>
 
 		<nav id="navigation">
 		<ul>
-			<li><a href="searchPage.xhtml?listingTypes=1">Rentals</a></li>
-			<li><a href="searchPage.xhtml?listingTypes=2">Sales</a></li>
-			<li><a href="agents">Agents</a></li>
-			<li><a href="customers/listings">My Apartments</a></li>
-			<li><a href="neighborhood-guides/">Neighborhoods</a></li>
-			<li class="navigation-standout"><a
-				class="find-agent standout standout-primary" href=""
-				data-modal-id="contact-agent"> Contact Agent </a></li>
+			<li><a href="#{request.contextPath}/views/searchPage.xhtml?listingTypes=1">Rentals</a></li>
+			<li><a href="#{request.contextPath}/views/searchPage.xhtml?listingTypes=2">Sales</a></li>
+			<li><a href="#{request.contextPath}/views/agentPage.xhtml">Agents</a></li>
+			<li><a href="#{request.contextPath}/views/postAdvertisement.xhtml">Post Classified</a></li>
+			<li><a href="#{request.contextPath}/adminviews/homePage.xhtml">AdminSection</a></li>
+			<li class="navigation-standout"><a class="find-agent standout standout-primary" href="" data-modal-id="contact-agent"> Contact Agent </a></li>
 
-			<li class="navigation-standout"><a class="login standout"
-				href="" data-modal-id="sign-in">Log in</a></li>
+			<li class="navigation-standout"><a class="login standout" href="" data-modal-id="sign-in">Log in</a></li>
 
-			<li class="navigation-standout"><a
-				class="signup standout standout-agent" href=""
-				data-modal-id="sign-up">Sign up</a></li>
+			<li class="navigation-standout"><a class="signup standout standout-agent" href="" data-modal-id="sign-up">Sign up</a></li>
 		</ul>
 		</nav>
 	</div>
 	</header>
+
+	<div class="cd-user-modal">
+		<div class="cd-user-modal-container">
+			<div id="cd-login">
+				form here
+				<p class="cd-form-bottom-message">
+					<a href="#0">Forgot your password?</a>
+				</p>
+			</div>
+			<div id="cd-signup">
+				form here
+			</div>
+			<div id="cd-reset-password">
+				form here
+				<p class="cd-form-bottom-message">
+					<a href="#0">Back to log-in</a>
+				</p>
+			</div>
+		</div>
+		<a href="#0" class="cd-close-form">Close</a>
+	</div>
+	<h:outputScript library="js" name="loginscript.js" />
+
+
 	<ui:insert name="body_content">
 		Here is the from the Layout
 	</ui:insert>
 	<ui:insert name="footer">
-		<footer id="footer" >
+		<footer id="footer">
 
 		<div class="container">
 			<div class="footer--deprecated clearfix">
@@ -93,45 +102,31 @@
 				</nav>
 
 				<div id="social">
-					<a href="https://www.facebook.com/urbancompassinc" target="_blank">
-						<img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/facebook.svg"
-						alt="Facebook" />
-					</a> <a href="https://twitter.com/urbancompass" target="_blank"> <img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/twitter.svg"
-						alt="Twitter" /></a> <a href="http://instagram.com/urbancompass"
-						target="_blank"> <img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/instagram.svg"
-						alt="Instagram" /></a> <a
-						href="http://www.pinterest.com/urbancompass" target="_blank">
-						<img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/pinterest.svg"
-						alt="Pinterest" />
-					</a> <a href="https://plus.google.com/+UrbanCompassNewYork/"
-						target="_blank"> <img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/googleplus.svg"
-						alt="Google+" /></a> <a
-						href="https://itunes.apple.com/us/app/urban-compass-find-home-you/id692766504"
-						target="_blank"> <img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/appstore.svg"
-						alt="iOS App Store" /></a>
+					<a href="https://www.facebook.com/urbancompassinc" target="_blank"> <img
+						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/facebook.svg" alt="Facebook" />
+					</a> <a href="https://twitter.com/urbancompass" target="_blank"> <img src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/twitter.svg"
+						alt="Twitter" /></a> <a href="http://instagram.com/urbancompass" target="_blank"> <img
+						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/instagram.svg" alt="Instagram" /></a> <a href="http://www.pinterest.com/urbancompass"
+						target="_blank"> <img src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/pinterest.svg" alt="Pinterest" />
+					</a> <a href="https://plus.google.com/+UrbanCompassNewYork/" target="_blank"> <img
+						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/googleplus.svg" alt="Google+" /></a> <a
+						href="https://itunes.apple.com/us/app/urban-compass-find-home-you/id692766504" target="_blank"> <img
+						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/nav/appstore.svg" alt="iOS App Store" /></a>
 				</div>
 			</div>
 
 			<div id="copyright">
-				© FairDeal Properties. All Rights Reserved. 2014 · <a
-					href="http://nytm.org/made-in-nyc" rel="nofollow" target="_blank">Made
-					In India</a>
+				© FairDeal Properties. All Rights Reserved. 2014 · <a href="http://nytm.org/made-in-nyc" rel="nofollow" target="_blank">Made In India</a>
 			</div>
 		</div>
 		</footer>
 
-<!-- 		<script type="text/javascript" -->
-<!-- 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh-t_LBkS9dKDRPTkScNoHhYLLYVtsStU"></script> -->
-		
+		<!-- 		<script type="text/javascript" -->
+		<!-- 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh-t_LBkS9dKDRPTkScNoHhYLLYVtsStU"></script> -->
+
 
 	</ui:insert>
 </h:body>
 
-<ui:insert name="scriptexecution"/>
+<ui:insert name="scriptexecution" />
 </html>

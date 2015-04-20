@@ -22,9 +22,9 @@
 							<span class="twitter-typeahead"
 								style="position: relative; display: inline-block;">
 								
-								<h:form id="login" name="sfasdasf" >
-									<p:inputText value="#{listingSuggestion.finalValue}" required="true" />
-									<p:commandButton value="Submit button" action="#{listingSuggestion.submit}" actionListener="#{listingSuggestion.actionListener}"/>
+								<h:form id="login" >
+									<p:autoComplete id="listingsuggestion" value="#{listingSuggestion.finalValue}" minQueryLength="3" maxResults="5" completeMethod="#{listingSuggestion.completeText}"/>
+									<p:commandButton value="Submit button" action="#{listingSuggestion.submit}" style="position: absolute; left: -9999px" />
 								</h:form>
 								
 								
