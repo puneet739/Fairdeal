@@ -1,0 +1,57 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/layouts/application_layout.xhtml">
+
+
+	<ui:define name="initialiation">
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{agentslist.fetchAgents}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="body_content">
+		<div id="wrapper">
+			<div id="container">
+				<div>
+					<div class="hero hero--offset hero--max clearfix"
+						style="background-image: #{request.contextPath}/resources/images/main-broker.jpg;">
+					</div>
+					<div class="layout-container">
+						<div class="clearfix">
+							<div class="layout-header">
+								<div class="layout-header__headline">Compass Agents</div>
+								<div class="layout-header__message">Compass Agents partner with you throughout your home search, providing their expertise and deep
+									knowledge of the Washington, D.C. real estate market to help you find a home you love.</div>
+							</div>
+						</div>
+						<div class="card card--compact">
+							<div class="agent_thumbnails">
+
+								<c:forEach items="#{agentslist.agents}" var="agent">
+									<div class="agent_thumbnails__thumbnail">
+										<a href="/agents/profiles/view/#{agent.id}">
+											<div class="agent_thumbnails__container">
+												<div class="agent_thumbnails__photo">
+													<img src="#{agent.imageUrl}"> </img>
+												</div>
+												<div class="agent_thumbnails__name">#{agent.name}</div>
+											</div>
+										</a>
+									</div>
+								</c:forEach>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="push"></div>
+		</div>
+
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,51 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/layouts/application_layout.xhtml">
+
+
+
+	<ui:define name="body_content">
+		<h:form>
+			<p:panel header="Post Classified">
+				<h:panelGrid columns="3">
+					<h:outputText value="Description" />
+					<p:inputText id="desc" value="#{classifiedbean.description}" required="true" label="Description" />
+					<p:message for="desc" />
+
+					<h:outputText value="Address" />
+					<p:inputText id="address" value="#{classifiedbean.address}"  />
+					<p:message for="address" />
+
+					<h:outputText value="City" />
+					<p:inputText id="city" value="#{classifiedbean.city}"  />
+					<p:message for="city" />
+
+					<h:outputText value="State" />
+					<p:inputText id="state" value="#{classifiedbean.state}"  />
+					<p:message for="state" />
+
+					<h:outputText value="Type" />
+					<p:selectOneMenu value="#{classifiedbean.type}" >
+						<f:selectItem itemLabel="Sell" itemValue="SELL" />
+						<f:selectItem itemLabel="Buy" itemValue="BUY" />
+					</p:selectOneMenu>
+					<p:message for="desc" />
+
+					<h:outputText value="Contact Number " />
+					<p:inputText value="#{classifiedbean.contactNumber}" />
+					<p:message for="desc" />
+
+					<h:outputText value="Price " />
+					<p:inputText value="#{classifiedbean.price}" />
+					<p:message for="desc" />
+
+					<h:outputText value="Images " />
+					<p:fileUpload value="#{classifiedbean.file}" mode="simple" skinSimple="true" />
+				</h:panelGrid>
+			</p:panel>
+			<p:commandButton value="Submit" ajax="false" action="#{classifiedbean.submit}" actionListener="#{classifiedbean.uploadImage}" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
