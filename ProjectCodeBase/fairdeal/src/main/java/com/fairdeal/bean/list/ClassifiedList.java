@@ -8,6 +8,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.fairdeal.bean.ClassifiedBean;
 import com.fairdeal.entity.Classified;
 import com.fairdeal.service.ClassifiedService;
@@ -15,12 +18,13 @@ import com.fairdeal.utility.DaoUtils;
 import com.fairdeal.utility.LoggerUtil;
 import com.fairdeal.utility.ObjectRepository;
 
-@ManagedBean(name = "classifiedlist")
+@Component(value = "classifiedlist")
 @RequestScoped
 public class ClassifiedList {
 
 	private String targetArea;
 
+	@Autowired
 	private ClassifiedService service;
 
 	private List<ClassifiedBean> classifieds;

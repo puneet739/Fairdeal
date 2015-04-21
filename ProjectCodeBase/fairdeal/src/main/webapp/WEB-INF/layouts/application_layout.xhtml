@@ -46,36 +46,41 @@
 			<li><a href="#{request.contextPath}/views/agentPage.xhtml">Agents</a></li>
 			<li><a href="#{request.contextPath}/views/postAdvertisement.xhtml">Post Classified</a></li>
 			<li><a href="#{request.contextPath}/adminviews/homePage.xhtml">AdminSection</a></li>
-			<li class="navigation-standout"><a class="find-agent standout standout-primary" href="" data-modal-id="contact-agent"> Contact Agent </a></li>
+			<li class="navigation-standout"><a class="find-agent standout standout-primary" href="" data-modal-id="contact-agent"
+				onclick="PF('dlg2').show();"> Contact Agent </a></li>
 
-			<li class="navigation-standout"><a class="login standout" href="" data-modal-id="sign-in">Log in</a></li>
-
-			<li class="navigation-standout"><a class="signup standout standout-agent" href="" data-modal-id="sign-up">Sign up</a></li>
+			<ui:fragment rendered="#{empty user.firstName}">
+				<li class="navigation-standout"><a class="login standout" href="#{request.contextPath}/views/login.xhtml" data-modal-id="sign-in">Log in</a></li>
+			</ui:fragment>
+			<ui:fragment rendered="#{not empty user.firstName}">
+				<li class="navigation-standout"><a class="login standout" href="" data-modal-id="sign-in">#{user.firstName} #{user.emailAddress}</a></li>
+			</ui:fragment>
 		</ul>
 		</nav>
 	</div>
 	</header>
 
-	<div class="cd-user-modal">
-		<div class="cd-user-modal-container">
-			<div id="cd-login">
-				form here
-				<p class="cd-form-bottom-message">
-					<a href="#0">Forgot your password?</a>
-				</p>
+	<p:dialog header="Modal Dialog" widgetVar="dlg2">
+		<div class="cd-user-modal">
+			<div class="cd-user-modal-container">
+				<div id="cd-login">
+					form here
+					<p class="cd-form-bottom-message">
+						<a href="#0">Forgot your password?</a>
+					</p>
+				</div>
+				<div id="cd-signup">form here</div>
+				<div id="cd-reset-password">
+					form here
+					<p class="cd-form-bottom-message">
+						<a href="#0">Back to log-in</a>
+					</p>
+				</div>
 			</div>
-			<div id="cd-signup">
-				form here
-			</div>
-			<div id="cd-reset-password">
-				form here
-				<p class="cd-form-bottom-message">
-					<a href="#0">Back to log-in</a>
-				</p>
-			</div>
-		</div>
-		<a href="#0" class="cd-close-form">Close</a>
-	</div>
+			<a href="#0" class="cd-close-form">Close</a>
+		</div>>
+	</p:dialog>
+
 	<h:outputScript library="js" name="loginscript.js" />
 
 
