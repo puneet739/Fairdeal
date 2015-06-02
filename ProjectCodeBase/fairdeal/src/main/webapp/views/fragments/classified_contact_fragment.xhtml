@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:outputStylesheet library="css" name="contactagent.css" target="head" />
+	<br />
+	<div class="modal-body contactus_complete">
+		<div class="row">
+			<div class="col-md-7">
+				<form class="well1">
+					<p>
+						<span> Your Message Will be Sent to dealer's Email Mobile. </span>
+					</p>
+					<p>
+						<span> Your Are </span> <input type="radio" /> Individual <input type="radio" /> Dealer
+					</p>
+					<div class="row">
+						<div class="col-md-6">
+							<p:inputText placeholder="Your  Name" styleClass="input_form1" value="#{userquery.firstName}" required="true" validatorMessage="#{msg['dlm.validator.firstname.message']}"/>
+							<p:inputText placeholder="Your Phone Number" styleClass="input_form1" value="#{userquery.userContactNumber}" required="true" validatorMessage="#{msg['dlm.validator.firstname.message']}"/>
+							<p:inputText placeholder="Your email address" styleClass="input_form1" value="#{userquery.userEmailAddress}" required="true" validatorMessage="#{msg['dlm.validator.firstname.message']}"/>
+						</div>
+						<div class="col-md-6">
+							<textarea class="input_textarea" placeholder="Message: I am interested this property" id="message" name="message" rows="6"></textarea>
+						</div>
+
+						<div class="spacer10"></div>
+
+						<div class="col-md-12">
+<!-- 							<p> -->
+<!-- 								<input type="checkbox" /> I Allow lateral thinking is the process of solving problems through an -->
+<!-- 							</p> -->
+<!-- 							<p> -->
+<!-- 								<input type="checkbox" /> Intersted in Home Loan thinking is the process of solving problems through an -->
+<!-- 							</p> -->
+							<br /><br />
+							<p:commandLink styleClass="srpBlue f13 mr10 lf vpn" action="#{queryaction.doSubmit(userquery)}" oncomplete="clearcontactUsForm()"
+									value="Send Email &amp; SMS" ajax="true" update="@form" />
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="col-md-5">
+				<div class="contact_detail">
+					<h2>Contact Details Of Dealer</h2>
+					<div class="col-md-4">
+						<img src="/userimage/Classifieds/53202_image1.png" alt="ALT NAME" class="img-responsive" />
+					</div>
+					<div class="col-md-8">
+							<p>#{user.firstName} #{user.lastName}</p>
+						<div>#{user.phoneNumber}</div>
+					</div>
+
+					<div class="col-sm-12">
+						<h3>Address:</h3>
+						<p>Contact #{user.firstName} #{user.lastName} to discuss this project/service.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</ui:composition>

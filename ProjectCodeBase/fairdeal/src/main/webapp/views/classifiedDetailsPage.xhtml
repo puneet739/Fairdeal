@@ -1,0 +1,148 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/layouts/application_layout.xhtml">
+
+	<ui:define name="meta">
+		<f:metadata>
+			<f:viewParam name="classifiedid" value="#{classifiedaction.classifiedId}" />
+			<f:event type="preRenderView" listener="#{classifiedaction.fetchClassified}" />
+			
+			<ui:param name="currentClassified" value="#{classifiedaction.classifiedBean}" />
+			<ui:param name="user" value="#{classifiedaction.userBean}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="title">
+		<title>#{currentClassified.shortTitle} #{msg['dlm.application.name']}</title>
+	</ui:define>
+
+	<ui:define name="body_content">
+		<h:outputStylesheet library="css" name="urbancompass_new.css" />
+		<h:outputScript library="js" name="imagegallery.js" />
+		
+		<div class="experimental">
+			<div class="container">
+				<div class="row row--listing">
+					<div itemscope="" itemtype="http://schema.org/Residence" class="listing--header">
+						<span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+							<h1 itemprop="streetAddress" class="listing--header--left">#{currentClassified.shortTitle}</h1>
+							<h2 class="listing--header--right">
+
+								#{currentClassified.address} <span itemprop="addressLocality">#{currentClassified.city}</span>, <span itemprop="addressRegion">#{currentClassified.state}</span>,
+								<span itemprop="postalCode">#{currentClassified.pincode}</span>
+							</h2>
+						</span>
+					</div>
+				</div>
+
+				<div class="row"></div>
+
+
+				<div class="row">
+					<div class="col-md-4" style="min-height: 421px; height: 421px;">
+						<div class="classified_image">
+							<img id="galThumimg_1" onerror="this.src='http://imgs.indiaproperty.com/images/noimg-apartment370.gif'" class="light-img selectedImage"
+								data-id="1" type="4" gallery-src="http://imgsj.ipstaticcnt.com/listings/4/0/t4_4065505_UjuLb_83.jpg"
+								style="display: block; max-height: 100%; max-width: 100%" src="/userimage/Classifieds/#{currentClassified.image1Url}" />
+						</div>
+					</div>
+
+
+					<div class="col-md-5" style="min-height: 421px; height: 421px;">
+						<div style="border: 1px">
+							<h1>#{currentClassified.shortTitle}</h1>
+
+							<c:if test="#{ not empty currentClassified.state}">
+								<div>
+									<div class="col-md-4 tick">State</div>
+									<div class="col-md-4 col-md-offset-2" style="padding: 2px">#{currentClassified.state}</div>
+								</div>
+							</c:if>
+
+							<c:if test="#{ not empty currentClassified.city}">
+								<div>
+									<div class="col-md-4 tick">City</div>
+									<div class="col-md-4 col-md-offset-2" style="padding: 2px">#{currentClassified.city}</div>
+								</div>
+							</c:if>
+
+							<c:if test="#{ not empty currentClassified.price}">
+								<div>
+									<div class="col-md-4 tick">Price</div>
+									<div class="col-md-4 col-md-offset-2" style="padding: 2px">#{currentClassified.price}</div>
+								</div>
+							</c:if>
+
+							<c:if test="#{ not empty currentClassified.postedDate}">
+								<div>
+									<div class="col-md-4 tick">PostedDate</div>
+									<div class="col-md-4 col-md-offset-2" style="padding: 2px">#{currentClassified.postedDate}</div>
+								</div>
+							</c:if>
+						</div>
+					</div>
+
+					<div class="col-md-3" style="border: 1px solid #d7d9de">
+						<ui:include src="/views/fragments/contactus_form.xhtml">
+							<ui:param name="user" value="#{user}" />
+							<ui:param name="classified" value="#{currentClassified}" />
+						</ui:include>
+					</div>
+
+
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card card--description listing-description">
+							<div class="layout-clearfix card__content">
+								<div class="card__content__header">
+									<h2>DESCRIPTION</h2>
+								</div>
+
+								<p id="description--card" style="word-wrap: break-word;">
+									#{currentClassified.description}<br />
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="row">
+					<div class="col-md-12">
+						<div id="key-details" class="card listing-keyDetails">
+							<div class="card__content card__content--no-padding--bottom">
+								<div class="card__content__header">
+									<h2>KEY DETAILS</h2>
+								</div>
+							</div>
+							<table class="table table--striped smaller table__key_details">
+								<tbody>
+									<tr>
+										<td><span class="keyDetails-title">Ownership:</span> <wbr /> <span class="keyDetails-detail">Co-op</span></td>
+										<td><span class="keyDetails-title">Maintenance:</span> <wbr /> <span class="keyDetails-detail">#{currentClassified.params['maintenance']}
+												/ mo.</span></td>
+									</tr>
+									<tr>
+										<td><span class="keyDetails-title">Minimum Down Payment:</span> <wbr /> <span class="keyDetails-detail">100%</span></td>
+										<td><span class="keyDetails-title">County:</span> <wbr /> <span class="keyDetails-detail">India</span></td>
+									</tr>
+									<tr>
+										<td><span class="keyDetails-title">Flooring:</span> <wbr /> <span class="keyDetails-detail">#{currentClassified.params['flooring']}</span></td>
+										<td><span class="keyDetails-title">Minimum Down Payment:</span> <wbr /> <span class="keyDetails-detail">100%</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+
+	<ui:define name="scriptexecution">
+	</ui:define>
+</ui:composition>
