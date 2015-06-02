@@ -1,199 +1,46 @@
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
 
-	<h:outputStylesheet library="css" name="listingstyle.css" />
-	<div id="content-2-wide" class="redesign">
-		<div id="main">
-			<div class="article listo list_titles" data-list-class="LIST" data-list-type="Titles" data-list-id="ls008437678" data-items-per-page="100"
-				data-author-id="ur25509309">
-				<div class="list_item odd">
-					<div class="image">
-						<a onclick="(new Image()).src='/rg/list/item-image/images/b.gif?link=%2Ftitle%2Ftt0119217%2F';" href="/title/tt0119217/"><div
-								class="hover-over-image zero-z-index" data-const="tt0119217">
-								<img height="209" width="140" alt="Image of Good Will Hunting" title="Image of Good Will Hunting"
-									src="http://ia.media-imdb.com/images/M/MV5BMTk0NjY0Mzg5MF5BMl5BanBnXkFtZTcwNzM1OTM2MQ@@._V1._SY209_CR1,0,140,209_.jpg"
-									class="loadlate zero-z-index" />
-								<noscript>&lt;img height="209" width="140" alt="Image of Good Will Hunting" title="Image of Good Will Hunting"
+	<h:panelGroup id="classified" layout="block">
+		This is insidePuneet 
+		<p:separator />
+		<ui:repeat var="classified" value="#{classifiedlist.classifieds}">
+				Classified Description from UI repeat : #{classified.description}
+				<p:separator />
+		</ui:repeat>
+		
+	</h:panelGroup>
 
-									src="http://ia.media-imdb.com/images/M/MV5BMTk0NjY0Mzg5MF5BMl5BanBnXkFtZTcwNzM1OTM2MQ@@._V1._SY209_CR1,0,140,209_.jpg" class="zero-z-index"
-									/&gt;</noscript>
-							</div> </a>
-					</div>
-					<div class="number">101.</div>
-					<div class="info">
-						<b><a onclick="(new Image()).src='/rg/item-title/list/images/b.gif?link=%2Ftitle%2Ftt0119217%2F';" href="/title/tt0119217/">Good Will
-								Hunting</a> <span class="year_type">(1997)</span></b>
+	<div id="pagination" align="center"></div>
 
+	<h:outputScript library="js" name="jquery.min.js" />
+	<h:outputScript library="js" name="jquery.simplePagination.js" />
+	<h:outputStylesheet library="css" name="simplePagination.css" />
 
-						<div class="rating rating-list"
-							data-auth="BCYl3TzbDC2k438YPO2Uaf8oq624fAf_Yb2Tq6okJZvsG8aT4Cz6U-skA1qKtkPEI8vBqiTLtSDRYLjkA8q8XHZtYF60KOk39ynFvr6v8ylq-ZTuZbFi6XmMb2LbuTnWPmGN"
-							id="tt0119217|imdb|8.3|8.3|list" data-ga-identifier="list" title="Users rated this 8.3/10 (507,258 votes) - click stars to rate">
-							<span class="rating-bg">&nbsp;</span> <span class="rating-imdb" style="width: 116px; display: block;">&nbsp;</span> <span class="rating-stars">
-								<a title="Register or login to rate this title" rel="nofollow" class=""><span>1</span></a> <a title="Register or login to rate this title"
-								rel="nofollow" class=""><span>2</span></a> <a title="Register or login to rate this title" rel="nofollow" class=""><span>3</span></a> <a
-								title="Register or login to rate this title" rel="nofollow" class=""><span>4</span></a> <a title="Register or login to rate this title"
-								rel="nofollow" class=""><span>5</span></a> <a title="Register or login to rate this title" rel="nofollow" class=""><span>6</span></a> <a
-								title="Register or login to rate this title" rel="nofollow" class=""><span>7</span></a> <a title="Register or login to rate this title"
-								rel="nofollow" class=""><span>8</span></a> <a title="Register or login to rate this title" rel="nofollow"><span>9</span></a> <a
-								title="Register or login to rate this title" rel="nofollow"><span>10</span></a>
-							</span> <span class="rating-rating"><span class="value">8.3</span><span class="grey">/</span><span class="grey">10</span></span> <span
-								class="rating-cancel"><a title="Delete" rel="nofollow"><span>X</span></a></span> &nbsp;
-						</div>
+	<h:form id="formId" style="display:none">
+		<p:inputText id="pageNumber" value="#{classifiedlist.currentPage}" />
+		<p:ajax listener="#{classifiedlist.updatePage}" event="click" update=":classified" />
+	</h:form>
 
-						<div class="item_description">
-							Will Hunting, a janitor at M.I.T., has a gift for mathematics, but needs help from a psychologist to find direction in his life. <span>(126
-								mins.)</span>
-						</div>
-						<div class="secondary">
-							Director: <a href="/name/nm0001814/">Gus Van Sant</a>
-						</div>
-						<div class="secondary">
-							Stars: <a href="/name/nm0000245/">Robin Williams</a>, <a href="/name/nm0000354/">Matt Damon</a>, <a href="/name/nm0000255/">Ben Affleck</a>, <a
-								href="/name/nm0001745/">Stellan Skarsgård</a>
-						</div>
-						<div class="button_strip">
+	<script>
+		$(function() {
+			$("#pagination").pagination({
+				items : #{classifiedlist.totalClassifieds},
+				itemsOnPage : #{classifiedlist.itemsOnPage},
+				cssStyle : 'light-theme',
+				onPageClick : function(currentPageNumber) {
+					showProjectPage(currentPageNumber)
+				}
+			});
+		});
 
+		function showProjectPage(currentPageNumber) {
+			var page = "#page-" + currentPageNumber;
+			console.log("The Page number is " + currentPageNumber)
+			var input = document.getElementById('formId:pageNumber');
+			input.value = currentPageNumber;
+			$("#formId").click();
+		}
+	</script>
 
-							<span class="wlb_wrapper btn2_wrapper btn2_active wlb_lite" data-tconst="tt0119217" data-size="small" data-caller-name="listo"
-								data-initialized="1"><a class="btn2 small btn2_text_on" onclick="" title="Click to add to watchlist"><span class="btn2_glyph"></span><span
-									class="btn2_text">Add to Watchlist</span></a></span>
-
-						</div>
-					</div>
-					<div class="clear">&nbsp;</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<div class="srpWrap "
-		onclick="srpTplTracking('PDVIEW_TUPLE', 'X17275426', '17275426','','QS');openPropDescPage('/shop-for-rent-lease-in-nit-faridabad-1000-sq-ft-r1-spid-X17275426','X17275426',this,'','','','');try{collectClickData(this,'tuple','X17275426');}catch(e){} "
-		title="View property details">
-		<i class="uiIcon pLatinum"></i>
-		<div class="wrapttl">
-			<div class="srpttl  wdthFix385 lf">
-				<b class="WebRupee f14 mr5"> ₹</b> <b id="rs_X17275426">20,000</b> <a id="desc_X17275426" class="b" wwrap="" target="_blank"
-					title="1000 Sq.Ft., Commercial Shops in NIT" href="/shop-for-rent-lease-in-nit-faridabad-1000-sq-ft-r1-spid-X17275426"
-					onclick="try{appendPropertyPosition(this,'X17275426','','','','');jsevt.stopBubble(event);srpTplTracking('PDVIEW_HEADER', 'X17275426', '17275426','','QS');jsb9onUnloadTracking();collectClickData(this,'link','X17275426');}catch(e){};">
-					1000 Sq.Ft., Commercial Shops in NIT </a>
-			</div>
-			<i class="uline" title="View Map"><i
-				class="uiIcon imap"></i><i class="ml_5 f13 vmid hverU">Map</i></i> <img class="logo_bdr abs lazy"
-				data-original="http://mediacdn.99acres.com/1131/7/22627407O-1412936648-DEALER_10807012_LOGO.jpeg"
-				src="http://mediacdn.99acres.com/1131/7/22627407O-1412936648-DEALER_10807012_LOGO.jpeg" alt="Bharat Batra, NIT, Faridabad"/>
-				<div class="clr"></div>
-		</div>
-
-
-		<div class="srpDetail">
-			<div class="srpImg rel">
-				<a class="show" href="#"
-					onclick="srpTplTracking(&quot;CLICK_PHOTOS_THUMBNAIL&quot;,&quot;X17275426&quot;, &quot;17275426&quot;,&quot;&quot;,&quot;QS&quot;);return prop.openImgGal(event,&quot;X17275426&quot;,{sno:6,ids:&quot;0;2389;&quot;,lstAcn:&quot;&quot;,lstAcnid:&quot;&quot;},&quot;noDefHead&quot;);">
-					<img class="imgBoxSrp lazy" alt="1000 Sq.Ft., Commercial Shops in NIT" width="200" height="150"
-					data-original="http://mediacdn.99acres.com/1581/3/31623773T-1427355940.jpeg" src="http://mediacdn.99acres.com/1581/3/31623773T-1427355940.jpeg"
-					onclick="srpTplTracking('CLICK_PHOTOS_THUMBNAIL','X17275426', '17275426','','QS');"/>
-				</a>
-				<div class="imgCap" onclick="return prop.openImgGal(event,&quot;X17275426&quot;,{sno:-1,ids:&quot;0;2389;&quot;},&quot;noDefHead&quot;);">
-					<a href="#"
-						onclick="srpTplTracking(&quot;CLICK_PROPERTY_PHOTO_LINK&quot;,&quot;X17275426&quot;, &quot;17275426&quot;,&quot;&quot;,&quot;QS&quot;);return prop.openImgGal(event,&quot;X17275426&quot;,{sno:6,ids:&quot;0;2389;&quot;,lstAcn:&quot;&quot;,lstAcnid:&quot;&quot;},&quot;noDefHead&quot;);">
-						7 Property Photos</a>
-					<div class="clr"></div>
-					<a href="#"
-						onclick="srpTplTracking(&quot;CLICK_LOCALITY_VIDEO_LINK&quot;,&quot;X17275426&quot;, &quot;17275426&quot;,&quot;2389&quot;,&quot;QS&quot;);return prop.openImgGal(event,&quot;X17275426&quot;,{vtag:&quot;LOC&quot;,sno:-1,tab:4,ids:&quot;0;2389;&quot;},&quot;noDefHead&quot;);">
-						1 Locality Video &amp; </a> <a href="#"
-						onclick="srpTplTracking(&quot;CLICK_LOCALITY_PHOTO_LINK&quot;,&quot;X17275426&quot;, &quot;17275426&quot;,&quot;2389&quot;,&quot;QS&quot;);return prop.openImgGal(event,&quot;X17275426&quot;,{sno:-1,tab:3,ids:&quot;0;2389;&quot;,lstAcn:&quot;&quot;,lstAcnid:&quot;&quot;},&quot;noDefHead&quot;);">
-						11 Photos</a>
-					<div class="clr"></div>
-				</div>
-			</div>
-
-			<div class="srpDataWrap">
-				<span>Built-up Area : <b>1000 Sq.Ft. </b>
-				</span>
-				<div class="sep clr mt3imp"></div>
-				<span><span>Highlights:&nbsp; </span> <span>On Lease&nbsp;</span><span> <span>/&nbsp;</span> 1 to 5 years old&nbsp;
-				</span></span>
-				<div class="sep clr"></div>
-				<div class="lf  f12">
-					<b>Description :</b> This property is located on metro road going towards gurgaon.
-				</div>
-				<div class="rel clr">
-					<div class="lf mt13 mr13">Features:</div>
-					<div class="iconDiv fc_icons fcInit" attr="2,9,24," style="margin-left: -18px">
-						<i class="i2" value="Power Back-up">&nbsp;</i><i class="i9" value="Security Personnel">&nbsp;</i><i class="i24" value="Water Storage">&nbsp;</i>
-					</div>
-
-					<div class="LyrIcon top0imp fc_icons fcInit wrapHvr hide" onclick="jsevt.stopBubble(event);" style="display: none;">
-						<div class="wrapIn">
-							<i class="i2"></i><i class="clr">Power Back-up </i>
-						</div>
-						<div class="wrapIn">
-							<i class="i9"></i><i class="clr">Security Personnel </i>
-						</div>
-						<div class="wrapIn">
-							<i class="i24"></i><i class="clr">Water Storage </i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="clr p5"></div>
-			<div class="lf f13 hm10 mb5">
-				Dealer : <a class="hverU blkImp" title="Batra Properties , Faridabad" target="_blank" href="/batra-properties-faridabad-drid-10807012"
-					onclick="srpTplTracking(&quot;CLICK_DEALER_LABEL_LINK&quot;,&quot;X17275426&quot;, &quot;17275426&quot;,&quot;10807012&quot;,&quot;QS&quot;);jsevt.stopBubble(event);">
-					Batra Properties</a>
-			</div>
-		</div>
-		<div class="clr"></div>
-		<div class="srpAction m10 mt5">
-			<a href="javascript:void(0);" class="srpBlue f13 mr10 lf"
-				onclick="jsData.fireEvent('contactDealerClick',{'propId':'X17275426'}); try{collectClickData(this,'contact','X17275426');}catch(e){}return pg.openEmailSMSLayer(event,this,'X17275426','QS','sid',_dbsid,'C','','','Dealer','','','','','N','','','','Y','','','10807012','N');"
-				title="Send E-mail &amp; SMS"> Contact Dealer <i>FREE</i></a> <a href="javascript:void(0);" class="srpWhite f13 mr10 lf vpn"
-				id="viewphnoX17275426"
-				onclick="jsData.fireEvent('viewPhoneNoClick',{'propId':'X17275426'}); ;try{collectClickData(this,'phone','X17275426');}catch(e){};return pg.openViewPhoneNoDropDownLayer(event, 'QS', '10807012', 'X17275426', 'P', 'from_src','sid','', '','', '','','N','listing rank','RGVhciBBRERfQlVZRVJOQU1FX0hFUkUsIHlvdSBtYXkgY29udGFjdCBCaGFyYXQgQmF0cmEgYXQgOTgxMTAyMzU1NSBmb3IgSU5SIDIwIEsgMTAwMCBTcS4gRnQuIFNob3AgaW4gTklULg==','listing rank','','','','','')"
-				title="View Phone Number">View Phone Number</a>
-
-			<!--ShortlistStar -->
-			<div id="prop_X17275426" class="sl_container blkImp f15 lf mt5 mr10">
-				<span class="sl_star_empty_container" style="display: block"
-					onclick="shortlist.slAction(this,'listing rank','X17275426');jsevt.stopBubble(event);" title="Shortlist this property"> <i
-					class="lf uiIcon sl_star_empty"></i> <span class="lf m5">Shortlist</span>
-				</span> <span class="sl_star_container" style="display: none" onclick="shortlist.slAction(this,'listing rank','X17275426');jsevt.stopBubble(event);"
-					title="Remove from shortlist"> <i class="lf uiIcon sl_star"></i> <span class="lf m5">Shortlisted</span>
-				</span>
-			</div>
-			<!--ShortlistStar -->
-			<div class="lf mt5" onclick="repList.openReportListingLayer('X17275426','10807012','A','L',0,'srp');jsevt.stopBubble(event);">
-				<div class="row dwnSrp">
-					<i class="spdpIcn repot_acu"></i> <a class="f13 b delCh blLink">Report problem with listing</a>
-				</div>
-			</div>
-		</div>
-		<div class="abs verifyLbl ViconPosSrp">
-			<div id="tooltipSociety" class="infoTip2 fwn f13 ital r5 hide VlyrPosSrp">
-				99acres has verified details of this property <em class="triangle-downPd VTipPosSrp"></em>
-			</div>
-			<i class="uiIcon verified"></i>
-		</div>
-		<div class="clr pdt10"></div>
-	</div>
 </ui:composition>

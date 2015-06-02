@@ -1,47 +1,36 @@
 package com.fairdeal.bean;
 
-import java.math.BigDecimal;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.primefaces.model.UploadedFile;
-import org.springframework.faces.webflow.JsfUtils;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-import com.fairdeal.utility.LoggerUtil;
+@Component(value = "agent")
+@Scope(value="request")
+public class AgentBean extends BaseBean {
 
-@ManagedBean(name = "agent")
-@RequestScoped
-public class AgentBean {
-
-	private String id;
-	private String name;
+	private String firstname;
+	private String lastname;
 	private String address;
-	private String imageUrl;
 	private String description;
 	private String emailId;
 	private String website;
-	private String agentPriority;
-	private BigDecimal contactNumber;
-	private UploadedFile uploadedImage;
+	private String contactNumber;
+	
+	private String mainImageUrl;
+	private String imageUrl;
+	private String image2Url;
+	private String image3Url;
+	
+	private UploadedFile uploadedMainImage;
+	private UploadedFile uploadedImage1;
+	private UploadedFile uploadedImage2;
+	private UploadedFile uploadedImage3;
+	
+	private List<UploadedFile> allFiles= new LinkedList<UploadedFile>();
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getAddress() {
 		return address;
@@ -67,31 +56,12 @@ public class AgentBean {
 		this.description = description;
 	}
 
-	public BigDecimal getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(BigDecimal contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
-	}
-
-	public UploadedFile getUploadedImage() {
-		return uploadedImage;
-	}
-
-	public void setUploadedImage(UploadedFile uploadedImage) {
-		this.uploadedImage = uploadedImage;
-	}
-
-	@Override
-	public String toString() {
-		return "AgentBean [id=" + id + ", name=" + name + ", address=" + address + ", imageUrl=" + imageUrl + ", description=" + description + ", contactNumber=" + contactNumber + ", uploadedImage=" + uploadedImage + "]";
-	}
-
-	public void doSubmit(){
-		FacesContext.getCurrentInstance().addMessage("messages", new FacesMessage("User Registered Succesfully"));
-		LoggerUtil.debug("Submiting the Agent Bean: "+this);
-		
 	}
 
 	public String getEmailId() {
@@ -110,11 +80,84 @@ public class AgentBean {
 		this.website = website;
 	}
 
-	public String getAgentPriority() {
-		return agentPriority;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setAgentPriority(String agentPriority) {
-		this.agentPriority = agentPriority;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getMainImageUrl() {
+		return mainImageUrl;
+	}
+
+	public void setMainImageUrl(String mainImageUrl) {
+		this.mainImageUrl = mainImageUrl;
+	}
+
+	public String getImage2Url() {
+		return image2Url;
+	}
+
+	public void setImage2Url(String image2Url) {
+		this.image2Url = image2Url;
+	}
+
+	public String getImage3Url() {
+		return image3Url;
+	}
+
+	public void setImage3Url(String image3Url) {
+		this.image3Url = image3Url;
+	}
+
+	public UploadedFile getUploadedMainImage() {
+		return uploadedMainImage;
+	}
+
+	public void setUploadedMainImage(UploadedFile uploadedMainImage) {
+		this.uploadedMainImage = uploadedMainImage;
+	}
+
+	public UploadedFile getUploadedImage1() {
+		return uploadedImage1;
+	}
+
+	public void setUploadedImage1(UploadedFile uploadedImage1) {
+		this.uploadedImage1 = uploadedImage1;
+	}
+
+	public UploadedFile getUploadedImage2() {
+		return uploadedImage2;
+	}
+
+	public void setUploadedImage2(UploadedFile uploadedImage2) {
+		this.uploadedImage2 = uploadedImage2;
+	}
+
+	public UploadedFile getUploadedImage3() {
+		return uploadedImage3;
+	}
+
+	public void setUploadedImage3(UploadedFile uploadedImage3) {
+		this.uploadedImage3 = uploadedImage3;
+	}
+
+	public List<UploadedFile> getAllFiles() {
+		return allFiles;
+	}
+
+	public void setAllFiles(List<UploadedFile> allFiles) {
+		this.allFiles = allFiles;
+	}
+
 }

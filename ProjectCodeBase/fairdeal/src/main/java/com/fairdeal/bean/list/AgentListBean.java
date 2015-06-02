@@ -5,30 +5,30 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.fairdeal.dao.AgentDao;
+import com.fairdeal.bean.AgentBean;
 import com.fairdeal.entity.Agent;
 import com.fairdeal.service.AgentService;
+import com.fairdeal.util.LoggerUtil;
 import com.fairdeal.utility.DaoUtils;
-import com.fairdeal.utility.LoggerUtil;
-import com.fairdeal.utility.ObjectRepository;
 
 @Component(value = "agentslist")
-@SessionScoped
+@Scope("session")
 public class AgentListBean implements Serializable {
 
 	private String test;
-	public List<AgentDao> agents;
-
+	public List<AgentBean> agents;
+	
+	
 	@Autowired
-	private AgentService service;
+	AgentService agentService;
 
 	public String getTest() {
 		return test;
@@ -38,32 +38,40 @@ public class AgentListBean implements Serializable {
 		this.test = test;
 	}
 
-	@PostConstruct
-	public void fetchAgents() {
+	public void init(){
 		LoggerUtil.debug("Calling the doomething method here.");
-		agents = new LinkedList<AgentDao>();
-		//service = ObjectRepository.getSpringBean(AgentService.class);
-		List<Agent> agentList = service.getAgents();
+		agents = new LinkedList<AgentBean>();
+		
+		List<Agent> agentList = agentService.getAllAgents();
 		for (Agent tempAgent : agentList) {
-			AgentDao bean = DaoUtils.getAgents(tempAgent);
+			AgentBean bean = DaoUtils.getAgents(tempAgent);
 			agents.add(bean);
 		}
 	}
-
-	public List<AgentDao> getAgents() {
+	
+	public void fetchAgents() {
+	}
+	
+	public void fetchAgents(String agentsId) {
+	
+		
+	}
+	
+	
+	public List<AgentBean> getAgents() {
 		return agents;
 	}
 
-	public void setAgents(List<AgentDao> agents) {
+	public void setAgents(List<AgentBean> agents) {
 		this.agents = agents;
 	}
 
-	public AgentService getService() {
-		return service;
+	public AgentService getAgentService() {
+		return agentService;
 	}
 
-	public void setService(AgentService service) {
-		this.service = service;
+	public void setAgentService(AgentService agentService) {
+		this.agentService = agentService;
 	}
 
 }

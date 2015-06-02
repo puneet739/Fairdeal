@@ -1,33 +1,79 @@
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
 	template="/WEB-INF/layouts/application_layout.xhtml">
 
-
-	<ui:define name="body_content">
+	<ui:define name="meta">
 		<f:metadata>
 			<f:viewParam name="area" value="#{classifiedlist.targetArea}" />
-			<f:event type="preRenderView" listener="#{classifiedlist.getListing}" />
+			<f:viewParam name="listingTypes" value="#{classifiedlist.listingType}" />
+			<f:event type="preRenderView" listener="#{classifiedlist.updatePage}" />
 		</f:metadata>
+	</ui:define>
+	
+	<ui:param name="listing_type" value="#{classifiedlist.listingType}" />
 
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh-t_LBkS9dKDRPTkScNoHhYLLYVtsStU"></script>
-		
-		<ui:include src="/views/fragments/classifiedlisting.xhtml"/>		
-		<!-- Uncomment this to enable the google map in the canvas -->
-		<!-- <div id="map-canvas" style="height: 100%"></div>
-		 <h:outputScript library="js" name="fairdeal-maps.js"/> -->
-		
-		
+	<ui:define name="title">
+		<c:if test="#{listing_type eq 1}">
+			<title>Sell-#{msg['dlm.application.name']}</title>
+		</c:if>
+		<c:if test="#{listing_type eq 2}">
+			<title>Rent-#{msg['dlm.application.name']}</title>
+		</c:if>
 	</ui:define>
 
-	<ui:define name="scriptexecution">
+	<ui:define name="body_content">
+		<h:outputScript library="js" name="jquery.simplePagination.js" />
+		<h:outputStylesheet library="css" name="simplePagination.css" />
+		<div>
+			<h:outputStylesheet library="css" name="listingpage.css" />
+			<section>
+				<div>
+					<div class="pp_container">
+						<div class="pp_left" style="position: absolute; float: left">
+							<img src="http://cssfounder.in/cms/realestate/img/left-add.jpg" />
+						</div>
+						<div class="pp_right" style="position: absolute; right: 0px;">
+							<img src="http://cssfounder.in/cms/realestate/img/add.jpg" width="220" />
+						</div>
+						<div class="container">
+
+							<div class="row">
+								<div class="col-md-11 pagi col-md-offset-1" />
+								<h:panelGroup id="classified" layout="block">
+									<ui:repeat var="classified" value="#{classifiedlist.classifieds}">
+										<ui:include src="/views/fragments/classified.xhtml">
+											<ui:param name="classified" value="#{classified}"></ui:param>
+										</ui:include>
+									</ui:repeat>
+								</h:panelGroup>
+								<div class="col-md-11 pagi" />
+							</div>
+						</div>
+
+						<script>
+		$(function() {
+			$(".pagi").pagination({
+				items : #{classifiedlist.totalClassifieds},
+				itemsOnPage : #{classifiedlist.itemsOnPage},
+				cssStyle : 'dark-theme',
+				onPageClick : function(currentPageNumber) {
+					showProjectPage(currentPageNumber)
+				}
+			});
+		});
+
 		
-		
-		
-		<h:outputScript>
-			//var classified = #{classifiedlist.classifieds};
-			//drawMarkerList(classified);
-		</h:outputScript>
+	</script>
+						<h:form id="paginationForm" prependId="false" style="display:none">
+							<p:inputText id="pageNumber" value="#{classifiedlist.currentPage}" />
+							<p:commandButton id="actionButton" actionListener="#{classifiedlist.doNothing}" update=":classified" />
+						</h:form>
+
+
+					</div>
+				</div>
+			</section>
+		</div>
 	</ui:define>
 
 </ui:composition>

@@ -3,9 +3,10 @@
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
 	template="/WEB-INF/layouts/application_layout.xhtml">
 
-
+	
+	
 	<ui:define name="body_content">
-		<p:tabView>
+		<p:tabView id="admin" dynamic="true" cache="true">
 			<p:tab title="Register Agent">
 				<ui:include src="/WEB-INF/admin/registerAgent.xhtml" />
 			</p:tab>
@@ -17,10 +18,21 @@
 			</p:tab>
 
 			<p:tab title="Agent Details">
-				<ui:include src="/WEB-INF/admin/agenttable.xhtml"/>
+				<ui:include src="/WEB-INF/admin/agenttable.xhtml" />
 			</p:tab>
+
+			<p:tab  title="Modify Agent">
+				<ui:include src="/WEB-INF/admin/modifyAgent.xhtml" />
+			</p:tab>
+			
+			<p:tab  title="Bulk Upload">
+				<ui:include src="/WEB-INF/admin/bulkUpload.xhtml" />
+			</p:tab>
+			
+			<p:tab  title="DeleteObject">
+				<ui:include src="/WEB-INF/admin/deleteObject.xhtml" />
+			</p:tab>
+			
 		</p:tabView>
-
 	</ui:define>
-
 </ui:composition>

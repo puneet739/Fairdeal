@@ -1,23 +1,34 @@
 package com.fairdeal.utility;
 
 import java.io.Serializable;
+import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ComponentSystemEvent;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.log4j.Logger;
-import org.brickred.socialauth.cdi.SocialAuth;
+import org.brickred.socialauth.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
+import com.fairdeal.Constants;
+import com.fairdeal.Results;
+import com.fairdeal.bean.SocialAuth;
+import com.fairdeal.bean.UserBean;
 import com.fairdeal.entity.User;
+import com.fairdeal.service.UserService;
+import com.fairdeal.util.Config;
+import com.fairdeal.util.LoggerUtil;
+import com.fairdeal.util.ObjectRepository;
+import com.fairdeal.util.Util;
 
 /**
  * This is the main component class, it is referred in application pages and
@@ -27,19 +38,24 @@ import com.fairdeal.entity.User;
  * 
  */
 
-@SessionScoped
+@Scope("session")
 @Component
-@Controller(value="socialauthenticator")
+@Controller(value = "socialauthenticator")
 public class SocialAuthenticator implements Serializable {
 
 	private static final Logger log = Logger.getLogger(SocialAuthenticator.class);
 
 	@Autowired
-	private SocialAuth socialauth ;
-	
+	private SocialAuth socialauth;
+
 	@Autowired
-	private User user;
-	
+	private UserBean user;
+
+	@Autowired
+	private UserService service;
+
+	@Autowired
+	SessionUtil sessionUtil;
 
 	/**
 	 * Variable for storing open id from main form
@@ -61,33 +77,14 @@ public class SocialAuthenticator implements Serializable {
 		ExternalContext context = javax.faces.context.FacesContext.getCurrentInstance().getExternalContext();
 
 		String viewUrl = context.getInitParameter("successUrl");
+		Map<String, String> map = context.getRequestParameterMap();
+		String urlString = map.get("urlString");
+		String query = map.get("queryString");
+
 		socialauth.setViewUrl("/views/loginSuccess.xhtml");
 
-		//if (btnClicked.indexOf("facebook") != -1) {
-			socialauth.setId("facebook");
-			log.info("***facebook*********" + socialauth.getId());
-//		} else if (btnClicked.indexOf("twitter") != -1) {
-//			socialauth.setId("twitter");
-//			log.info("***twitter*********" + socialauth.getId());
-//		} else if (btnClicked.indexOf("yahoo") != -1) {
-//			socialauth.setId("yahoo");
-//			log.info("***yahoo*********" + socialauth.getId());
-//		} else if (btnClicked.indexOf("hotmail") != -1) {
-//			socialauth.setId("hotmail");
-//			log.info("***hotmail*********" + socialauth.getId());
-//		} else if (btnClicked.indexOf("google") != -1) {
-//			socialauth.setId("google");
-//			log.info("***google*********" + socialauth.getId());
-//		} else if (btnClicked.indexOf("linkedin") != -1) {
-//			socialauth.setId("linkedin");
-//			log.info("***linkedin*********" + socialauth.getId());
-//		} else if (btnClicked.indexOf("foursquare") != -1) {
-//			socialauth.setId("foursquare");
-//			log.info("***foursquare*********" + socialauth.getId());
-//		} else {
-//			socialauth.setId(openID);
-//			log.info("***openID*********" + socialauth.getId());
-//		}
+		socialauth.setId("facebook");
+		log.info("***facebook*********" + socialauth.getId());
 	}
 
 	/**
@@ -98,7 +95,7 @@ public class SocialAuthenticator implements Serializable {
 	public String mainPage() {
 		return "/home.xhtml";
 	}
-	
+
 	public String getUserName() {
 		return socialauth.getProfile().getFirstName();
 	}
@@ -117,10 +114,25 @@ public class SocialAuthenticator implements Serializable {
 		if (!ajaxRequest) {
 			try {
 				socialauth.connect();
-				user.setFirstName(socialauth.getProfile().getFirstName());
-				user.setEmailAddress((socialauth.getProfile().getEmail()));
+				Profile profile = socialauth.getProfile();
+				User userEntity = service.getUser(profile.getEmail());
+
+				if (userEntity == null) {
+					String dob = "01/02/2015";
+					if (profile.getDob() != null)
+						dob = profile.getDob().toString();
+					int result = service.registerUser(profile.getFirstName(), profile.getLastName(), profile.getEmail(), null, dob, "FBxxxxxx");
+					if (result == Results.SUCCESS)
+						userEntity = service.getUser(profile.getEmail());
+						service.modifyUser(userEntity);
+				}
+				AuthenticationManager authmanager = ObjectRepository.getContext().getBean("authenticationManager", AuthenticationManager.class);
+				Authentication request = new UsernamePasswordAuthenticationToken(userEntity.getEmailAddress(), userEntity.getPassword());
+				Authentication result = authmanager.authenticate(request);
+				SecurityContextHolder.getContext().setAuthentication(result);
+				sessionUtil.serUserDetails(userEntity);
 			} catch (Exception e) {
-				log.warn(e);
+				LoggerUtil.error("Exception is caused while FB login", e);
 			}
 		}
 	}
@@ -132,4 +144,5 @@ public class SocialAuthenticator implements Serializable {
 	public void setSocialauth(SocialAuth socialauth) {
 		this.socialauth = socialauth;
 	}
+
 }
