@@ -5,6 +5,7 @@ import java.util.List;
 import com.fairdeal.entity.Agent;
 
 public interface AgentDao extends BaseDao{
+	
 	public Long insertAgent(Agent agent);
 
 	public Long updateAgent(Agent agent);

@@ -17,7 +17,6 @@ public class AgentDaoRepository implements AgentDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	
 	@Override
 	public Long insertAgent(Agent agent) {
 		Session session = sessionFactory.getCurrentSession();
@@ -79,6 +78,14 @@ public class AgentDaoRepository implements AgentDao {
 		query.setParameter("deleted", Constants.Classified.CLASIFIED_NOT_DELETED);
 		Long  result = (Long) query.uniqueResult();
 		return result;
+	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 
 }

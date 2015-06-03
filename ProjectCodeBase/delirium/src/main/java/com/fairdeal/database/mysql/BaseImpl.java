@@ -5,14 +5,12 @@ import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.fairdeal.service.AgentService;
 import com.fairdeal.service.ClassifiedService;
 import com.fairdeal.service.UserService;
 import com.fairdeal.util.ObjectRepository;
 
-@Component(value = "baseimpl")
 @Transactional
 public class BaseImpl {
 

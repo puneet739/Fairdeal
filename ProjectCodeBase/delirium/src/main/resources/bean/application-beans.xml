@@ -12,12 +12,14 @@
 		http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
 
+	<import resource="database.xml" />
+
 	<context:component-scan base-package="com.fairdeal" />
 	<aop:aspectj-autoproxy />
 	<tx:annotation-driven transaction-manager="transactionManager" />
-	<import resource="database.xml" />
-
-	<task:annotation-driven executor="myExecutor" scheduler="myScheduler" />
+	
+	<task:annotation-driven executor="myExecutor"
+		scheduler="myScheduler" />
 	<task:executor id="myExecutor" pool-size="5" />
 	<task:scheduler id="myScheduler" pool-size="10" />
 
@@ -26,6 +28,7 @@
 	<bean id="agentdao" class="com.fairdeal.database.mysql.AgentDaoRepository" />
 	<bean id="tagsRepo" class="com.fairdeal.util.TagRepo" />
 	<bean id="UserQueryDao" class="com.fairdeal.database.mysql.UserQueryDaoRepository" />
+	<bean id="baseImpl" class="com.fairdeal.database.mysql.BaseImpl" />
 
 	<bean id="agentService" class="com.fairdeal.service.impl.AgentServiceImpl" />
 	<bean id="classifiedService" class="com.fairdeal.service.impl.ClassifiedServiceImpl" />
@@ -49,7 +52,7 @@
 	</bean>
 
 	<!-- THYMELEAF: Template Engine (Spring3-specific version) -->
-	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
 		<property name="templateResolvers">
 			<set>
 				<ref bean="emailTemplateResolver" />

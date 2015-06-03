@@ -51,7 +51,6 @@ public class AgentServiceImpl implements AgentService {
 			agentDao.insertAgent(agent);
 			User user = service.getUser(emailAddress);
 			user.setAgentId(agent.getId());
-			user.setAgentId(50);
 			service.modifyUser(user);
 			uploadAgentImages(agent, imagesMap);
 		} catch (ConstraintViolationException e) {
