@@ -87,7 +87,8 @@
     </filter>
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/adminviews/*</url-pattern>
+        <url-pattern>/views/*</url-pattern>
     </filter-mapping>
 	<session-config>
 		<session-timeout>60</session-timeout>

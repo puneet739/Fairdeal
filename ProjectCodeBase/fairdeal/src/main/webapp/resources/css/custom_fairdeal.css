@@ -11,6 +11,9 @@
 	transition: opacity 0.3s 0, visibility 0 0;
 }
 
+.modal-dialog{
+	width:auto;
+}
 #logincss {@import "login.css"
 	
 }

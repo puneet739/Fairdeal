@@ -5,10 +5,9 @@
 	<p:ajaxExceptionHandler id="exception3" type="com.fairdeal.exception.OutOfQuotaException" onexception="outOfQuotaPopup()" />
 
 	<h:outputScript library="js" name="jquery.bpopup.min.js" />
-	<h:outputScript library="bootstrap" name="js/bootstrap.min.js" />
 
 	<div class="login_block" id="login-modal" tabindex="-1" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="width: auto">
 			<div class="modal-content">
 				<span style="position: absolute; top: -40px; left: 42%;"> <img src="#{request.contextPath}/resources/images/login.png" /></span>
 				<div class="modal-header">

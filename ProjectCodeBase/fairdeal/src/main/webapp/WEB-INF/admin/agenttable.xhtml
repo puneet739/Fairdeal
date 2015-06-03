@@ -11,15 +11,15 @@
 				</p:column>
 
 				<p:column headerText="Agent">
-					<h:outputLink value="#{request.contextPath}/agents/profiles/view/#{listing.agentId}">#{listing.agentId}</h:outputLink>
+					<h:outputLink value="#{request.contextPath}/views/agentDetailPage.xhtml?agentid=#{agent.id}">#{agent.firstname}</h:outputLink>
 				</p:column>
 
-				<p:column headerText="Description">
-					<h:outputText value="#{listing.description}" />
+				<p:column headerText="Email">
+					<h:outputText value="#{agent.emailId}" />
 				</p:column>
 
-				<p:column headerText="ID">
-					<h:outputText value="#{listing.id}" />
+				<p:column headerText="Phone">
+					<h:outputText value="#{agent.contactNumber}" />
 				</p:column>
 
 

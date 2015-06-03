@@ -7008,9 +7008,6 @@ body {
 	margin: 15px 0
 }
 
-input[type="text"] {
-	border: none
-}
 
 input[type="text"]:-moz-placeholder, input[type="email"]:-moz-placeholder,
 	input[type="password"]:-moz-placeholder {

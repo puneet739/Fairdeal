@@ -330,7 +330,6 @@ img{vertical-align:middle}
 a{text-decoration:none}
 input:focus,select:focus,textarea:focus,button:focus{outline:none}
 body{color:#3b3d40;font-family:"proxima-nova",sans-serif;font-size:83.3%;font-style:normal;font-weight:normal}
-input[type="text"]{border:none}
 input[type="text"]:-moz-placeholder,input[type="email"]:-moz-placeholder,input[type="password"]:-moz-placeholder{color:#878f98}
 input[type="text"]::-moz-placeholder,input[type="email"]::-moz-placeholder,input[type="password"]::-moz-placeholder{color:#878f98}
 input[type="text"]:-ms-input-placeholder,input[type="email"]:-ms-input-placeholder,input[type="password"]:-ms-input-placeholder{color:#878f98}
