@@ -10,9 +10,6 @@
 					<p>
 						<span> Your Message Will be Sent to dealer's Email Mobile. </span>
 					</p>
-					<p>
-						<span> Your Are </span> <input type="radio" /> Individual <input type="radio" /> Dealer
-					</p>
 					<div class="row">
 						<div class="col-md-6">
 							<p:inputText placeholder="Your  Name" styleClass="input_form1" value="#{userquery.firstName}" required="true" validatorMessage="#{msg['dlm.validator.firstname.message']}"/>
@@ -26,12 +23,6 @@
 						<div class="spacer10"></div>
 
 						<div class="col-md-12">
-<!-- 							<p> -->
-<!-- 								<input type="checkbox" /> I Allow lateral thinking is the process of solving problems through an -->
-<!-- 							</p> -->
-<!-- 							<p> -->
-<!-- 								<input type="checkbox" /> Intersted in Home Loan thinking is the process of solving problems through an -->
-<!-- 							</p> -->
 							<br /><br />
 							<p:commandLink styleClass="srpBlue f13 mr10 lf vpn" action="#{queryaction.doSubmit(userquery)}" oncomplete="clearcontactUsForm()"
 									value="Send Email &amp; SMS" ajax="true" update="@form" />
@@ -44,7 +35,7 @@
 				<div class="contact_detail">
 					<h2>Contact Details Of Dealer</h2>
 					<div class="col-md-4">
-						<img src="/userimage/Classifieds/53202_image1.png" alt="ALT NAME" class="img-responsive" />
+						<img src="/userimage/Classifieds/53202_image1.png" alt="ALT NAME" class="img-responsive img-circle" />
 					</div>
 					<div class="col-md-8">
 							<p>#{user.firstName} #{user.lastName}</p>
