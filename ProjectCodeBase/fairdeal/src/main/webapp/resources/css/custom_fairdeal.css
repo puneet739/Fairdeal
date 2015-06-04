@@ -389,7 +389,7 @@
 }
 
 .tick:before {
-	content: url(base/../../images/small_checkmark.png) " ";
+	content: url(base/../../resources/images/small_checkmark.png) " ";
 }
 
 .contact_agent_classified {
