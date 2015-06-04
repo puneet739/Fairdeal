@@ -10,15 +10,8 @@
 		</f:metadata>
 	</ui:define>
 	
-	<ui:param name="listing_type" value="#{classifiedlist.listingType}" />
-
 	<ui:define name="title">
-		<c:if test="#{listing_type eq 1}">
-			<title>Sell-#{msg['dlm.application.name']}</title>
-		</c:if>
-		<c:if test="#{listing_type eq 2}">
-			<title>Rent-#{msg['dlm.application.name']}</title>
-		</c:if>
+		<title>#{msg['dlm.application.name']}</title>
 	</ui:define>
 
 	<ui:define name="body_content">
