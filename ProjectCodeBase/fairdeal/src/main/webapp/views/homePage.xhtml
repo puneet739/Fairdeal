@@ -14,7 +14,7 @@
 						<div class="feature-slide__buttons">
 							<span class="twitter-typeahead" style="position: relative; display: inline-block;"> 
 							<h:form id="autocompletesearch">
-									<p:autoComplete id="listingsuggestion" value="#{listingSuggestion.finalValue}" minQueryLength="3" maxResults="5"
+									<p:autoComplete id="listingsuggestion" value="#{listingSuggestion.finalValue}" minQueryLength="2" maxResults="5"
 										completeMethod="#{listingSuggestion.completeText}" placeholder="#{msg['dlm.homepage.search.text']}" />
 									<p:commandButton value="Submit button" action="#{listingSuggestion.submit}" style="position: absolute; left: -9999px" />
 							</h:form> 
@@ -72,21 +72,6 @@
 					</div>
 				</div>
 			</div>
-
-			<ul id="press" class="homepage--press">
-				<li><a href="#{request.contextPath}/views/underconstructionPage.xhtml" target="_blank"><img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/homepage/press/cnn.png" alt="CNN" /></a></li>
-				<li><a href="#{request.contextPath}/views/underconstructionPage.xhtml" target="_blank"><img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/homepage/press/bloomberg.png" alt="Bloomberg" /></a></li>
-				<li><a href="#{request.contextPath}/views/underconstructionPage.xhtml" target="_blank"> <img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/homepage/press/cnbc.png" alt="CNBC" /></a></li>
-				<li><a href="#{request.contextPath}/views/underconstructionPage.xhtml" target="_blank"><img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/homepage/press/techcrunch.png" alt="TechCrunch" /></a></li>
-				<li><a href="#{request.contextPath}/views/underconstructionPage.xhtml" target="_blank"><img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/homepage/press/business_insider.png" alt="Business Insider" /></a></li>
-				<li><a href="#{request.contextPath}/views/underconstructionPage.xhtml" target="_blank"><img
-						src="//d382qe86mkdg2o.cloudfront.net/static/5991f44/img/homepage/press/venturebeat.png" alt="VentureBeat" /></a></li>
-			</ul>
 		</div>
 	</ui:define>
 
