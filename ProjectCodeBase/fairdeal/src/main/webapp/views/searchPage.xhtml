@@ -11,7 +11,12 @@
 	</ui:define>
 	
 	<ui:define name="title">
-		<title>#{msg['dlm.application.name']}</title>
+		<ui:fragment rendered="#{classifiedlist.listingType eq 1}">
+			<title>Sell-#{msg['dlm.application.name']}</title>
+		</ui:fragment>
+		<ui:fragment rendered="#{classifiedlist.listingType eq 2}">
+			<title>Rent-#{msg['dlm.application.name']}</title>
+		</ui:fragment>
 	</ui:define>
 
 	<ui:define name="body_content">

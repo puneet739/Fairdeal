@@ -6,7 +6,6 @@
 		<f:metadata>
 			<f:viewParam name="classifiedid" value="#{classifiedaction.classifiedId}" />
 			<f:event type="preRenderView" listener="#{classifiedaction.fetchClassified}" />
-			
 			<ui:param name="currentClassified" value="#{classifiedaction.classifiedBean}" />
 			<ui:param name="user" value="#{classifiedaction.userBean}" />
 		</f:metadata>
@@ -52,33 +51,33 @@
 						<div style="border: 1px">
 							<h1>#{currentClassified.shortTitle}</h1>
 
-							<c:if test="#{ not empty currentClassified.state}">
+							<ui:fragment rendered="#{not empty currentClassified.state}">
 								<div>
 									<div class="col-md-4 tick">State</div>
 									<div class="col-md-4 col-md-offset-2" style="padding: 2px">#{currentClassified.state}</div>
 								</div>
-							</c:if>
+							</ui:fragment>
 
-							<c:if test="#{ not empty currentClassified.city}">
+							<ui:fragment rendered="#{ not empty currentClassified.city}">
 								<div>
 									<div class="col-md-4 tick">City</div>
 									<div class="col-md-4 col-md-offset-2" style="padding: 2px">#{currentClassified.city}</div>
 								</div>
-							</c:if>
+							</ui:fragment>
 
-							<c:if test="#{ not empty currentClassified.price}">
+							<ui:fragment rendered="#{not empty currentClassified.price}">
 								<div>
 									<div class="col-md-4 tick">Price</div>
 									<div class="col-md-4 col-md-offset-2" style="padding: 2px">#{currentClassified.price}</div>
 								</div>
-							</c:if>
+							</ui:fragment>
 
-							<c:if test="#{ not empty currentClassified.postedDate}">
+							<ui:fragment rendered="#{ not empty currentClassified.postedDate}">
 								<div>
 									<div class="col-md-4 tick">PostedDate</div>
 									<div class="col-md-4 col-md-offset-2" style="padding: 2px">#{currentClassified.postedDate}</div>
 								</div>
-							</c:if>
+							</ui:fragment>
 						</div>
 					</div>
 
