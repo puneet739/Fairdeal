@@ -33,7 +33,8 @@
 
 			<div class="form-group">
 				<p>
-					<p:commandButton styleClass="btn btn-primary btn-block" value="Submit" action="#{classifiedaction.submitClassifiedQuery(classified,userquery)}" />
+					<p:commandButton styleClass="btn btn-primary btn-block" value="Submit" action="#{classifiedaction.submitClassifiedQuery(classified,userquery)}" oncomplete="clearcontactUsForm()"/>
+					<p:commandButton id="reset" styleClass="btn btn-default" value="Reset" type="reset" ajax="true" update="@form" style="display:none"/>
 				</p>
 			</div>
 		</h:form>
