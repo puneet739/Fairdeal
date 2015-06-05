@@ -36,13 +36,13 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 
-<!-- 		<property name="url" value="jdbc:mysql://192.168.56.101:3306/pptest" /> -->
-<!-- 		<property name="username" value="pptestuser" /> -->
-<!-- 		<property name="password" value="pptestpw" /> -->
+<!-- 		<property name="url" value="jdbc:mysql://localhost:3306/propertyplayer" /> -->
+<!-- 		<property name="username" value="pp_user" /> -->
+<!-- 		<property name="password" value="pp_pass#123" /> -->
 		
-		<property name="url" value="jdbc:mysql://192.168.56.101:3306/fairdeal" />
-		<property name="username" value="fairdeal" />
-		<property name="password" value="fairdealpw" />
+<!-- 		<property name="url" value="jdbc:mysql://192.168.56.101:3306/fairdeal" /> -->
+<!-- 		<property name="username" value="fairdeal" /> -->
+<!-- 		<property name="password" value="fairdealpw" /> -->
 	</bean>
 
 	<bean id="transactionManager"
