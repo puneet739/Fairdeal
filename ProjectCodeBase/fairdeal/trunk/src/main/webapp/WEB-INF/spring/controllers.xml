@@ -17,9 +17,6 @@
 
 	<context:component-scan base-package="com.fairdeal" />
 
-
-	<bean name="socialauth" class="com.fairdeal.bean.SocialAuth" />
-
 	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
 		<property name="scopes">
 			<map>
