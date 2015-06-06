@@ -1,0 +1,38 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/layouts/application_layout.xhtml">
+
+	
+	
+	<ui:define name="body_content">
+		<p:tabView id="admin" dynamic="true" cache="true">
+			<p:tab title="Register Agent">
+				<ui:include src="/WEB-INF/admin/registerAgent.xhtml" />
+			</p:tab>
+			<p:tab title="Advertisement Management">
+				<ui:include src="/WEB-INF/layouts/underconstruction.xhtml" />
+			</p:tab>
+			<p:tab title="Classified Listings">
+				<ui:include src="/WEB-INF/admin/listingtable.xhtml" />
+			</p:tab>
+
+			<p:tab title="Agent Details">
+				<ui:include src="/WEB-INF/admin/agenttable.xhtml" />
+			</p:tab>
+
+			<p:tab  title="Modify Agent">
+				<ui:include src="/WEB-INF/admin/modifyAgent.xhtml" />
+			</p:tab>
+			
+			<p:tab  title="Bulk Upload">
+				<ui:include src="/WEB-INF/admin/bulkUpload.xhtml" />
+			</p:tab>
+			
+			<p:tab  title="DeleteObject">
+				<ui:include src="/WEB-INF/admin/deleteObject.xhtml" />
+			</p:tab>
+			
+		</p:tabView>
+	</ui:define>
+</ui:composition>

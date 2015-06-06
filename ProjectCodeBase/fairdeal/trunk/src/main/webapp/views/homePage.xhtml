@@ -1,0 +1,79 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/layouts/application_layout.xhtml">
+
+	<ui:define name="body_content">
+		<div id="homepage-content">
+			<div class="feature-slide feature-slide--people">
+				<div class="feature-slide__content">
+					<div class="feature-slide__subtitle">Work with #{msg['dlm.application.name']} Agents to find</div>
+					<div class="feature-slide__title">A HOME YOU LOVE</div>
+
+					<div class="feature-slide__omnibox">
+						<div class="feature-slide__buttons">
+							<span class="twitter-typeahead" style="position: relative; display: inline-block;"> 
+							<h:form id="autocompletesearch">
+									<p:autoComplete id="listingsuggestion" value="#{listingSuggestion.finalValue}" minQueryLength="2" maxResults="5"
+										completeMethod="#{listingSuggestion.completeText}" placeholder="#{msg['dlm.homepage.search.text']}" />
+									<p:commandButton value="Submit button" action="#{listingSuggestion.submit}" style="position: absolute; left: -9999px" />
+							</h:form> 
+							 <span
+								style="position: absolute; left: -9999px; visibility: hidden; white-space: nowrap; font-family: proxima-nova, sans-serif; font-size: 18px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></span>
+								<span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="feature-pills">
+				<div class="feature-pill">
+					<div class="feature-pill__content">
+						<div class="feature-pill__image">
+							<a href="#{request.contextPath}/views/agentDetailPage.xhtml?agentid=#{loader.mainUserid}"> <img
+								src="/userimage/#{loader.mainUserid}_agentImage.png" /></a>
+						</div>
+						<div class="feature-pill__title">An agent that works for you</div>
+						<div class="feature-pill__text">
+							Save time by partnering with the best agent for your search.
+							<div class="feature-pill__text__link">
+								<a href="#{request.contextPath}/views/agentPage.xhtml"> Meet our agents <span class="ss-icon ss-directright"></span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="feature-pill">
+					<div class="feature-pill__content">
+						<div class="feature-pill__image">
+							<img src="#{request.contextPath}/resources/images/homepage-apartment-circle.png" />
+						</div>
+						<div class="feature-pill__title">Thousands of up-to-date listings</div>
+						<div class="feature-pill__text">
+							Accurate listing information to help you choose the apartments you like best. Search <a href="#{request.contextPath}/searchPage.xhtml?listingTypes=2">Rentals</a> or <a
+								href="#{request.contextPath}/searchPage.xhtml?listingTypes=1">Sales</a>.
+						</div>
+					</div>
+				</div>
+				<div class="feature-pill">
+					<div class="feature-pill__content">
+						<div class="feature-pill__image">
+							<img src="#{request.contextPath}/resources/images/homepage-phone-circle.png" />
+						</div>
+						<div class="feature-pill__title">A simple way to search</div>
+						<div class="feature-pill__text">
+							Manage your entire apartment search in one place, from wherever you are.
+							<div class="feature-pill__text__link">
+								<a href="#{request.contextPath}/views/underconstructionPage.xhtml"> Download our app <span class="ss-icon ss-directright"></span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+
+
+</ui:composition>

@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/layouts/application_layout.xhtml">
+	<ui:define name="body_content">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+		<div class="container">
+			<div class="row">
+				<p:growl id="successMessage" for="successMessage" autoUpdate="true"/>
+				<div class="col-md-10 col-md-offset-1">
+					<div class="well well-sm">
+						<h:form styleClass="form-horizontal" prependId="false">
+							<legend class="text-center header">We're here to help you, and you to help us</legend>
+
+							<legend class="text-center">Have a question? Concern? Just want to say hi? We look forward to hearing from you</legend>
+							<div class="form-group">
+								<span class="col-md-1 col-md-offset-2 text-center pp_required"><i class="fa fa-user bigicon"></i></span>
+								<div class="col-md-8">
+									<p:inputText id="fname" placeholder="First Name" styleClass="form-control" value="#{userquery.firstName}" required="true" validatorMessage="#{msg['dlm.validator.firstname.message']}"/>
+									<p:message for="fname"/> 
+								</div>
+							</div>
+							<div class="form-group">
+								<span class="col-md-1 col-md-offset-2 text-center pp_required"><i class="fa fa-user bigicon"></i></span>
+								<div class="col-md-8">
+									<p:inputText id="lname" placeholder="Last Name" styleClass="form-control" value="#{userquery.lastName}" required="true" validatorMessage="#{msg['dlm.validator.lastname.message']}"/>
+									<p:message for="lname"/> 
+								</div>
+							</div>
+
+							<div class="form-group">
+								<span class="col-md-1 col-md-offset-2 text-center pp_required"><i class="fa fa-envelope-o bigicon"></i></span>
+								<div class="col-md-8">
+									<p:inputText id="email" placeholder="Email Address" styleClass="form-control" value="#{userquery.userEmailAddress}" required="true" validatorMessage="#{msg['dlm.validator.email.message']}">
+										<f:validateRegex pattern="#{msg['dlm.validator.email']}"/>
+									</p:inputText>
+									<p:message for="email"/> 
+								</div>
+							</div>
+
+							<div class="form-group">
+								<span class="col-md-1 col-md-offset-2 text-center pp_required"><i class="fa fa-phone-square bigicon"></i></span>
+								<div class="col-md-8">
+									<p:inputText id="phone" placeholder="Phone" styleClass="form-control" value="#{userquery.userContactNumber}" required="true" validatorMessage="#{msg['dlm.validator.phone.message']}"/>
+									<p:message for="phone"/> 
+								</div>
+							</div>
+
+							<div class="form-group">
+								<span class="col-md-1 col-md-offset-2 text-center pp_required"><i class="fa fa-pencil-square-o bigicon"></i></span>
+								<div class="col-md-8">
+									<p:inputTextarea id="message" placeholder="Enter your massage for us here. We will get back to you within 2 business days"
+										styleClass="form-control" value="#{userquery.optionalMessage}" rows="7" required="true" validatorMessage="#{msg['dlm.validator.message.message']}" autoResize="false"/>
+									<p:message for="message"/> 
+								</div>
+							</div>
+
+							<div class="form-group" >
+								<div class="col-md-12 text-center">
+									<p:commandButton styleClass="btn btn-primary btn-lg" action="#{queryaction.doSubmit(userquery)}" value="Submit" oncomplete="clearcontactUsForm()"/>
+									<p:commandButton id="reset" styleClass="btn btn-default" value="Reset" type="reset" ajax="true" update="@form" style="display:none"/>
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<style>
+.header {
+	color: #36A0FF;
+	font-size: 27px;
+	padding: 10px;
+}
+
+.bigicon {
+	font-size: 35px;
+	color: #36A0FF;
+}
+</style>
+	</ui:define>
+</ui:composition>

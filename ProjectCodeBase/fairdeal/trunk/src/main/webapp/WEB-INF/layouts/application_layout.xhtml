@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/property_player.gz.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<ui:insert name="meta" />
+	</meta>
+	<ui:insert name="title">
+		<title>#{msg['dlm.application.name']}</title>
+	</ui:insert>
+	<link rel="icon" href="#{request.contextPath}/resources/images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="#{request.contextPath}/resources/images/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" />
+	
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+
+	<!-- This is added to overcome the issue with IE and d3 compatibilty. -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</h:head>
+
+<h:body>
+<!-- 	<h:outputStylesheet library="css" name="bootstrap.min.css" /> -->
+	<h:outputStylesheet library="css" name="symbolset.css" />
+	<h:outputStylesheet library="css" name="normalize.css" />
+	<h:outputStylesheet library="css" name="style.css"  />
+	<h:outputStylesheet library="css" name="custom_fairdeal.css" target="head"/>
+
+	<h:outputScript library="js" name="loginscript.js" />
+	<h:outputScript library="js" name="application.js" />
+	
+<!-- 	<h:outputScript library="bootstrap" name="js/bootstrap.js"/> -->
+	<ui:insert name="initialiation" />
+	<ui:insert name="header">
+		<ui:include src="/views/fragments/loginfragment.xhtml" />
+		<ui:include src="/WEB-INF/layouts/header_bar.xhtml" />
+	</ui:insert>
+
+
+	<ui:insert name="body_content">
+		Here is the from the Layout
+	</ui:insert>
+	<div id="push" />
+	<ui:insert name="footer">
+		<ui:include src="/WEB-INF/layouts/footer.xhtml" />
+	</ui:insert>
+	
+</h:body>
+
+
+<ui:insert name="scriptexecution" />
+</html>

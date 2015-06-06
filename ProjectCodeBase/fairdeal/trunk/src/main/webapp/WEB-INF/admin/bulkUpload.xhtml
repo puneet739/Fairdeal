@@ -1,0 +1,12 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+	<p:panel id="bulk_upload" header="Bulk Upload Classifieds">
+		<h:form>
+			<h:outputText value="Upload Bulk Classified File" />
+			<p:fileUpload id="bulkfile" fileUploadListener="#{bulkuploadaction.handleFileUpload}" mode="advanced" auto="true" skinSimple="true" update="bulkTab" />
+			<h:outputText id="bulkTab" value="#{bulkuploadaction.uploadedFile.getFileName()}" />
+			<p:commandButton value="Bulk Upload" action="#{bulkuploadaction.doBulkUploadClassifieds}" ajax="true" />
+		</h:form>
+	</p:panel>
+</ui:composition>

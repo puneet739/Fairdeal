@@ -1,0 +1,111 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+	template="/WEB-INF/layouts/application_layout.xhtml">
+
+
+	<ui:define name="body_content">
+		<f:metadata>
+			<f:viewParam name="agentid" value="#{agent.id}" />
+			<f:event type="preRenderView" listener="#{agentaction.fetchAgent(agent.id)}" />
+		</f:metadata>
+		<div id="wrapper">
+			<div id="container">
+				<div>
+					<div class="hero hero--offset hero--max clearfix"
+						style="background-image: url(#{request.contextPath}/resources/images/agent-detail-background.jpg);">
+					</div>
+					<div itemscope="" itemtype="http://schema.org/RealEstateAgent" class="layout-container profile">
+						<div class="clearfix">
+							<div class="header layout-row">
+								<div class="layout-column header__photo">
+									<div class="header__photo__container">
+										<img itemprop="image" src="/userimage/#{agentaction.agent.mainImageUrl}" alt="#{agentaction.agent.firstname} #{agentaction.agent.lastname}" />
+									</div>
+								</div>
+								<div class="layout-column layout-column--17 header__info">
+									<div class="layout-row">
+										<div class="layout-column layout-column--14">
+											<div itemprop="name" class="header__info__name">
+												<h1>#{agentaction.agent.firstname} #{agentaction.agent.lastname}</h1>
+											</div>
+											<div class="header__info__title">
+												<h2>
+													Licensed Real Estate Salesperson, <span itemprop="member">Compass</span>
+												</h2>
+											</div>
+										</div>
+										<div class="layout-column layout-column--10">
+											<div class="header__info__action">
+												<a id="test" class="button button--hero button--white contact__agent__button"> Work with #{agentaction.agent.firstname}
+													#{agentaction.agent.lastname} </a>
+											</div>
+										</div>
+
+									</div>
+									<div class="header__info__separator"></div>
+									<span class="header__info__contact"> <span class="header__info__contact__icon ss-phone"></span> <a itemprop="telephone"
+										class="header__info__contact__text" href="tel:#{agentaction.agent.contactNumber}"> #{agentaction.agent.contactNumber} </a>
+									</span> <span class="header__info__contact"> <span class="header__info__contact__icon ss-mail"></span> <a itemprop="email"
+										class="header__info__contact__text" href="mailto:#{agentaction.agent.emailId}"> #{agentaction.agent.emailId} </a>
+									</span>
+								</div>
+							</div>
+							<div class="about box">
+								<div class="layout-row">
+									<div class="layout-column layout-column--14">
+										<div class="box__header">
+											<h2>About #{agentaction.agent.firstname} #{agentaction.agent.lastname}</h2>
+										</div>
+										<div class="about__body">
+											#{agentaction.agent.description} Kaitlin is an accomplished professional known for her tireless work ethic and personable approach, and she
+											prides herself on her commitment to customizing and assertively executing the best possible transactions on her clients’ behalf. <br /> <br />
+											A Southern California native, Kaitlin grew up in a family focused on real estate and development, which is how she learned the value in
+											taking care of people and serving her clients. Confident, focused, and persistent, Kaitlin is now a seasoned New Yorker with finely-tuned
+											negotiating skills and an impressive roster of clients that she curated as a former journalist for several award-winning publications and
+											television networks. Before joining her previous firm, Kaitlin produced for a well-known daytime news program and reported for a leading
+											national celebrity entertainment news show. She also worked in production for NY1, where she gained familiarity with the various
+											neighborhoods and cultures covering breaking news across the five boroughs. <br /> <br /> Apart from real estate, Kaitlin is most
+											passionate about volunteering and travel, and has worked with young people in impoverished communities throughout the world including
+											Mexico, West Africa, and Costa Rica. She produced and directed a short documentary that chronicles the lives of indigenous groups in Niger,
+											West Africa, rated one of the world’s poorest countries by the United Nations. When not serving her clients, Kaitlin is an active New
+											Yorker: she runs, enjoys yoga, and bikes along the Hudson River. She is also a self-proclaimed Barry’s Boot Camp addict. Kaitlin loves
+											being immersed in the high energy of downtown where she has lived for seven years, and always enjoys a quintessential New York City brunch.
+										</div>
+									</div>
+
+									<div class="layout-column layout-column--10">
+										<div class="about__traits">
+											<div class="about__traits__header">
+												<h3>Experience &amp; Achievements</h3>
+											</div>
+
+											<div class="about__traits__item layout-row">
+												<div class="achievemnts">
+													<ul>
+														<li>Specialties: Upper East Side, Downtown Manhattan</li>
+														<li>BA in International Relations from University of Southern California</li>
+													</ul>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 							<ui:include src="/views/fragments/agentListing.xhtml"> -->
+							<!-- 								<f:param name="agent" value="#{agentaction.agent}"/> -->
+							<!-- 							</ui:include> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<ui:include src="/views/fragments/contactagentfragment.xhtml">
+			<ui:param name="agent" value="#{agentaction.agent}"></ui:param>
+		</ui:include>
+
+	</ui:define>
+
+</ui:composition>

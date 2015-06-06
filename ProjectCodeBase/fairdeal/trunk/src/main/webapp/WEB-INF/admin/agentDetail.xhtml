@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:panelGrid id="grid" columns="3" cellpadding="10">
+		<h:outputText value="First Name" />
+		<p:inputText id="name" value="#{agent.firstname}" required="true" label="FirstName" />
+		<p:message for="name" />
+
+		<h:outputText value="Last Name" />
+		<p:inputText id="lastname" value="#{agent.lastname}" label="Last Name" />
+		<p:message for="lastname" />
+
+		<h:outputText value="Address" />
+		<p:inputText id="address" value="#{agent.address}" label="Address" />
+		<p:message for="address" />
+
+		<h:outputText value="WebSite" />
+		<p:inputText id="website" value="#{agent.website}" label="WebSite" />
+		<p:message for="desc" />
+
+		<h:outputText value="Email" />
+		<p:inputText id="email" value="#{agent.emailId}" required="true" label="Email" />
+		<p:message for="email" />
+
+		<h:outputText value="Phone Number" />
+		<p:inputText id="phone" value="#{agent.contactNumber}" label="Contact Number" />
+		<p:message for="phone" />
+
+		<h:outputText value="Description" />
+		<p:inputTextarea id="desc" value="#{agent.description}" label="Description" />
+		<p:message for="desc" />
+
+		<h:outputText value="Agent Image" />
+		<p:fileUpload id="agentImage" fileUploadListener="#{agentaction.handleFileUpload}" mode="advanced" auto="true" skinSimple="true" update="imageTab" />
+		<h:outputText id="imageTab" value="#{agentaction.agent.uploadedMainImage.getFileName()}" />
+		
+		<h:outputText value="Image1" />
+		<p:fileUpload id="agentImage1" value="#{agent.uploadedImage1}" mode="simple" skinSimple="true" />
+		<p:message for="agentImage1" />
+
+		<h:outputText value="Image2" />
+		<p:fileUpload id="agentImage2" value="#{agent.uploadedImage2}" mode="simple" skinSimple="true" />
+		<p:message for="agentImage2" />
+
+	</h:panelGrid>
+</ui:composition>
