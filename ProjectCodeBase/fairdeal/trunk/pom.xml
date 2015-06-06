@@ -202,18 +202,6 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.brickred</groupId>
-			<artifactId>socialauth-cdi</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.faces</groupId>
-					<artifactId>jsf-api</artifactId>
-				</exclusion>
-			</exclusions>
-			<version>2.1</version>
-		</dependency>
-
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
