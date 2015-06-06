@@ -44,7 +44,9 @@ import org.brickred.socialauth.Profile;
 import org.brickred.socialauth.SocialAuthConfig;
 import org.brickred.socialauth.SocialAuthManager;
 import org.brickred.socialauth.util.SocialAuthUtil;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpRequest;
+import org.springframework.stereotype.Component;
 
 import com.fairdeal.util.ObjectRepository;
 import com.fairdeal.utility.SocialAuthenticator;
@@ -60,8 +62,8 @@ import com.fairdeal.utility.Util;
  * Please note that : @Name("socialauth")
  */
 
-@Named("socialauth")
-@SessionScoped
+@Component("socialauth")
+@Scope("session")
 public class SocialAuth implements Serializable {
 
 	/**

@@ -70,7 +70,6 @@ public class SocialAuthenticator implements Serializable {
 	 */
 
 	public void updateId(ActionEvent ae) {
-		String btnClicked = ae.getComponent().getId();
 		log.info("Test Log");
 		log.info("*************login method called ************" + socialauth.getId());
 
